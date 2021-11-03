@@ -1,0 +1,13 @@
+# NPM
+**/node_modules
+
+# Smart Contracts
+**/artifacts
+**/cache
+
+# OpenZeppelin
+.openzeppelin/dev-*.json
+.openzeppelin/.session
+
+# Node
+**.env
