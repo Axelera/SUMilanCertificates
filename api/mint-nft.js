@@ -15,6 +15,14 @@ const nftContract = new alchemyWeb3.eth.Contract(
     CONTRACT_ADDRESS
 );
 
+const checkIfCanMint = async (to, tokenURI, eventId) => {
+    const gas = await nftContract.methods.mintCertificate(to, tokenURI, eventId).estimateGas({
+        from: METAMASK_PUBLIC_KEY
+    });
+    console.log('Gas:', gas);
+    return gas;
+};
+
 const mintNFT = (to, tokenURI, eventId) => {
     return new Promise(async (resolve, reject) => {
         // get the nonce - nonce is needed for security reasons. It keeps track of the number of
@@ -32,30 +40,23 @@ const mintNFT = (to, tokenURI, eventId) => {
                 .mintCertificate(to, tokenURI, eventId)
                 .encodeABI(), // call the mintCertificate function from our SUMilanCertificateUpgradeable.sol file
         };
-        const signPromise = alchemyWeb3.eth.accounts.signTransaction(
+        const signedTx = await alchemyWeb3.eth.accounts.signTransaction(
             tx,
             METAMASK_PRIVATE_KEY
         );
-        const signedTx = await signPromise.catch((err) => {
-            console.log('Promise failed:', err);
-            reject(err);
-        });
         if (signedTx) {
-            alchemyWeb3.eth.sendSignedTransaction(
-                signedTx.rawTransaction,
-                function (err, hash) {
-                    if (!err) {
-                        console.log('The hash of our transaction is: ', hash);
-                        resolve(hash);
-                    } else {
-                        console.log(
-                            'Something went wrong when submitting our transaction:',
-                            err
-                        );
-                        reject(err);
-                    }
+            try {
+                const txReceipt = await alchemyWeb3.eth.sendSignedTransaction(
+                    signedTx.rawTransaction,
+                );
+                if (txReceipt.status) {
+                    resolve(txReceipt.transactionHash);
+                } else {
+                    reject('The transaction cannot be completed');
                 }
-            );
+            } catch (err) {
+                reject('The transaction cannot be completed');
+            }
         } else {
             console.log('Something went wrong when signing our transaction');
             reject(
@@ -81,5 +82,6 @@ const getTokenURI = (tokenId) => {
     });
 };
 
+module.exports.checkIfCanMint = checkIfCanMint;
 module.exports.mintNFT = mintNFT;
 module.exports.getTokenURI = getTokenURI;

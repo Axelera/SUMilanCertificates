@@ -8,13 +8,19 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const getEventData = async (eventId) => {
     const result = await supabase
         .from('events')
-        .select('title, date, duration')
+        .select('title, date, duration, canMintCertificate')
         .eq('identifier', eventId);
-    if (result.status !== 200 && result.data.length === 0) {
+    if (result.status !== 200 || result.data.length === 0) {
         throw new Error('Error while retrieving event title');
     }
     const eventData = result.data[0];
     const eventDate = new Date(eventData.date);
+    if (!eventData.canMintCertificate) {
+        return {
+            error: 'We don\'t provide a certificate for this event',
+            status: 400,
+        };
+    }
     const endDate = add(eventDate, { minutes: eventData.duration });
     if (isBefore(new Date(), endDate)) {
         return {

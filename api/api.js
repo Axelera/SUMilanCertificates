@@ -1,6 +1,7 @@
 const express = require('express');
+const cors = require('cors');
 
-const { mintNFT, getTokenURI } = require('./mint-nft');
+const { mintNFT, getTokenURI, checkIfCanMint } = require('./mint-nft');
 const { generateCertificateImg } = require('./img-generator');
 const { getEventData } = require('./event-query');
 const { uploadToIPFS } = require('./pinata-upload');
@@ -11,6 +12,8 @@ const port = 4000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Automatically allow cross-origin requests
+app.use(cors({ origin: true }));
 
 app.post('/api/mint', async (request, response) => {
     /* Request body should be in the following format:
@@ -23,6 +26,8 @@ app.post('/api/mint', async (request, response) => {
     try {
         console.log(request.body);
         const { recipientAddress, recipientName, eventId } = request.body;
+
+        await checkIfCanMint(recipientAddress, 'ipfs://dummyURI', eventId);
 
         const eventData = await getEventData(eventId);
         if (eventData.error) {
@@ -58,9 +63,13 @@ app.post('/api/mint', async (request, response) => {
         response.set(200).send({
             transactionHash: txHash,
         });
+        // used for tests
+        // response.set(200).send({
+        //     transactionHash: '0xfeb3756f864e095a5e8c5c22ccb01917e1ecd721417820f466e4296d9835a7ed',
+        // });
     } catch (error) {
         console.error(error);
-        response.status(500).send(error);
+        response.status(500).send(error.message);
     }
 });
 
