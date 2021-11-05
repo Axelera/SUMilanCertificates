@@ -3,14 +3,14 @@
   "proxies": [
     {
       "address": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
-      "txHash": "0x8c93d1c9f365ce1b651ea534152806c397a5be4b45b68c8f27618ccdf33fff62",
+      "txHash": "0x72e89fea78f56e6d5b16f0665a88fa647dc6f2442c9fed3d9adb7af68ef8882f",
       "kind": "uups"
     }
   ],
   "impls": {
-    "59c7a916f9c5c6c65fee846b9ac424e77365117fd2191e58a1e03d17d942d6b2": {
+    "29c4849bf00f7435b52a497699a288208aacb4dbdc6ff16edd12a5558169e14f": {
       "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-      "txHash": "0xa2f75525ffe804bd13d32e8e91f47160c256071ee4afa632d08558dd901da31d",
+      "txHash": "0x562e833f58f0838f73c05a54b5ccba7c19a91d8cd8a38aabd493842fadd2c426",
       "layout": {
         "storage": [
           {
@@ -92,6 +92,36 @@
             "src": "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol:75"
           },
           {
+            "contract": "ERC721EnumerableUpgradeable",
+            "label": "_ownedTokens",
+            "type": "t_mapping(t_address,t_mapping(t_uint256,t_uint256))",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol:24"
+          },
+          {
+            "contract": "ERC721EnumerableUpgradeable",
+            "label": "_ownedTokensIndex",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol:27"
+          },
+          {
+            "contract": "ERC721EnumerableUpgradeable",
+            "label": "_allTokens",
+            "type": "t_array(t_uint256)dyn_storage",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol:30"
+          },
+          {
+            "contract": "ERC721EnumerableUpgradeable",
+            "label": "_allTokensIndex",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol:33"
+          },
+          {
+            "contract": "ERC721EnumerableUpgradeable",
+            "label": "__gap",
+            "type": "t_array(t_uint256)46_storage",
+            "src": "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol:171"
+          },
+          {
             "contract": "OwnableUpgradeable",
             "label": "_owner",
             "type": "t_address",
@@ -118,18 +148,18 @@
           {
             "contract": "SUMilanCertificate",
             "label": "_tokenIdCounter",
-            "type": "t_struct(Counter)2147_storage",
-            "src": "contracts/SUMilanCertificateUpgradeable.sol:14"
+            "type": "t_struct(Counter)2544_storage",
+            "src": "contracts/SUMilanCertificateUpgradeable.sol:16"
           },
           {
             "contract": "SUMilanCertificate",
             "label": "_certificateOwners",
-            "type": "t_mapping(t_address,t_struct(EventsOwned)2564_storage)",
-            "src": "contracts/SUMilanCertificateUpgradeable.sol:20"
+            "type": "t_mapping(t_address,t_struct(EventsOwned)2967_storage)",
+            "src": "contracts/SUMilanCertificateUpgradeable.sol:22"
           }
         ],
         "types": {
-          "t_struct(Counter)2147_storage": {
+          "t_struct(Counter)2544_storage": {
             "label": "struct CountersUpgradeable.Counter",
             "members": [
               {
@@ -141,13 +171,13 @@
           "t_uint256": {
             "label": "uint256"
           },
-          "t_mapping(t_address,t_struct(EventsOwned)2564_storage)": {
+          "t_mapping(t_address,t_struct(EventsOwned)2967_storage)": {
             "label": "mapping(address => struct SUMilanCertificate.EventsOwned)"
           },
           "t_address": {
             "label": "address"
           },
-          "t_struct(EventsOwned)2564_storage": {
+          "t_struct(EventsOwned)2967_storage": {
             "label": "struct SUMilanCertificate.EventsOwned",
             "members": [
               {
@@ -170,6 +200,18 @@
           },
           "t_array(t_uint256)49_storage": {
             "label": "uint256[49]"
+          },
+          "t_mapping(t_address,t_mapping(t_uint256,t_uint256))": {
+            "label": "mapping(address => mapping(uint256 => uint256))"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]"
+          },
+          "t_array(t_uint256)46_storage": {
+            "label": "uint256[46]"
           },
           "t_mapping(t_uint256,t_string_storage)": {
             "label": "mapping(uint256 => string)"
