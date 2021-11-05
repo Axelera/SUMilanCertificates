@@ -46,16 +46,23 @@ const mintNFT = (to, tokenURI, eventId) => {
         );
         if (signedTx) {
             try {
-                const txReceipt = await alchemyWeb3.eth.sendSignedTransaction(
+                alchemyWeb3.eth.sendSignedTransaction(
                     signedTx.rawTransaction,
+                    function (err, hash) {
+                        if (!err) {
+                            console.log('The hash of our transaction is: ', hash);
+                            resolve(hash);
+                        } else {
+                            console.log(
+                                'Something went wrong when submitting our transaction:',
+                                err
+                            );
+                            reject(err);
+                        }
+                    }
                 );
-                if (txReceipt.status) {
-                    resolve(txReceipt.transactionHash);
-                } else {
-                    reject('The transaction cannot be completed');
-                }
             } catch (err) {
-                reject('The transaction cannot be completed');
+                console.log('The transaction cannot be completed');
             }
         } else {
             console.log('Something went wrong when signing our transaction');
