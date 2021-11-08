@@ -1,6 +1,5 @@
 // from: https://blog.logrocket.com/how-to-create-nfts-with-javascript/
 
-require('dotenv').config();
 const ALCHEMY_API_URL = process.env.ALCHEMY_API_URL;
 const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
 const METAMASK_PUBLIC_KEY = process.env.METAMASK_PUBLIC_KEY;
@@ -9,7 +8,7 @@ const METAMASK_PRIVATE_KEY = process.env.METAMASK_PRIVATE_KEY;
 const { createAlchemyWeb3 } = require('@alch/alchemy-web3');
 const alchemyWeb3 = createAlchemyWeb3(ALCHEMY_API_URL);
 
-const contract = require('../artifacts/contracts/SUMilanCertificateUpgradeable.sol/SUMilanCertificate.json');
+const contract = require('./assets/SUMilanCertificate.json');
 const nftContract = new alchemyWeb3.eth.Contract(
     contract.abi,
     CONTRACT_ADDRESS

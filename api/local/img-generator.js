@@ -2,19 +2,19 @@ var Jimp = require('jimp');
 
 const generateImg = (name, event, date, saveToLocal = false) => {
     return new Promise((resolve, reject) => {
-        Jimp.read('api/base.png', async (err, base) => {
+        Jimp.read('api/local/base.png', async (err, base) => {
             if (err) {
                 reject(err);
                 return;
             }
             const fontName = await Jimp.loadFont(
-                'api/fonts/source-sans-pro/46-black/ufonts.com_source-sans-pro.ttf.fnt'
+                'api/local/fonts/source-sans-pro/46-black/ufonts.com_source-sans-pro.ttf.fnt'
             );
             const fontEvent = await Jimp.loadFont(
-                'api/fonts/source-sans-pro/32-blue/ufonts.com_source-sans-pro.ttf.fnt'
+                'api/local/fonts/source-sans-pro/32-blue/ufonts.com_source-sans-pro.ttf.fnt'
             );
             const fontDate = await Jimp.loadFont(
-                'api/fonts/source-sans-pro/20-purple/ufonts.com_source-sans-pro.ttf.fnt'
+                'api/local/fonts/source-sans-pro/20-purple/ufonts.com_source-sans-pro.ttf.fnt'
             );
             base.print(
                 fontName,
@@ -39,7 +39,7 @@ const generateImg = (name, event, date, saveToLocal = false) => {
                 .print(fontDate, 750, 480, date);
 
             if (saveToLocal) {
-                base.write('api/certificate.png'); // save
+                base.write('api/local/certificate.png'); // save
             }
 
             base.getBuffer('image/png', (err, image) => {
