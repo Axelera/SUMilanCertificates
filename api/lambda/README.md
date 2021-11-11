@@ -5,6 +5,7 @@ This code is typically used for development.
 ### Requirements
 - [these](../README.md#requirements) requirements
 - create an Amazon AWS Lambda + API Gateway (REST) resource
+- copy the Smart Contract ABI (if you compiled the contract with the command `npx hardhat compile`, you can find it inside the JSON file at `artifacts/contracts/SUMilanCertificateUpgradeable.sol/SUMilanCertificate.json` at `abi` key) inside [assets/SUMilanCertificate.json](assets/SUMilanCertificate.json) file
 
 ### Install
 - install dependencies by running the command:
