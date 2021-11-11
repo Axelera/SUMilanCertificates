@@ -19,7 +19,7 @@ app.post('/api/mint', async (request, response) => {
     /* Request body should be in the following format:
      *   {
      *       "recipiendAddress": "0x...", // address of the recipient
-     *       "recipientName": "John Doe" // name of the recipient
+     *       "recipientName": "John Doe", // name of the recipient
      *       "eventId": "incontro-41" // id of the event
      *   }
      */
