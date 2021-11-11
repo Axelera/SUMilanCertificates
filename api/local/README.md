@@ -3,7 +3,7 @@ This code is typically used for development.
 
 ## Usage
 ### Requirements
-- [these](../README.md) requirements
+- [these](../README.md#requirements) requirements
 
 ### Install
 - create a file named `.env` and put these lines inside:

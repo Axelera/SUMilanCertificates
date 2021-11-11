@@ -3,7 +3,7 @@ This code is typically used for development.
 
 ## Usage
 ### Requirements
-- [these](../README.md) requirements
+- [these](../README.md#requirements) requirements
 - create an Amazon AWS Lambda + API Gateway (REST) resource
 
 ### Install
